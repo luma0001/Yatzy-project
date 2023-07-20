@@ -41,36 +41,41 @@
       <section id="live_game">
         The game
 
-        <table>
-          <thead>
+        <table id="points_table">
+          <thead id="points_table_head">
             <tr>
-              <th>Ledger</th>
+              <th id="player_name">Maximum Points</th>
+              <th id="ones_score">1's - 5</th>
+              <th id="twos_score">2's - 10</th>
+              <th id="threes_score">3's - 15</th>
+              <th id="fours_score">4's - 20</th>
+              <th id="fives_score">5's - 25</th>
+              <th id="sixes_score">6's - 30</th>
+              <th id="sum_one">SUM</th>
+              <th id="bonus_score">Bonus - 50</th>
+              <th id="parir_of_one_score">1'pair - 12</th>
+              <th id="parir_of_two_score">2'pair - 22</th>
+              <th id="three_alike_score">3'alike - 18</th>
+              <th id="fours_alike_score">4'alike - 24</th>
+              <th id="small_straight_score">small straight - 15</th>
+              <th id="large_straight_score">Large straight - 20</th>
+              <th id="house_score">House - 28</th>
+              <th id="chance_score">Chance - 30</th>
+              <th id="yahtzee_score">Yahtzee - 50</th>
+              <th id="sum_total">SUM</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td id="player_name">Maximum Points</td>
-              <td id="ones_score">1's - 5</td>
-              <td id="twos_score">2's - 10</td>
-              <td id="threes_score">3's - 15</td>
-              <td id="fours_score">4's - 20</td>
-              <td id="fives_score">5's - 25</td>
-              <td id="sixes_score">6's - 30</td>
-              <td id="sum_one">SUM</td>
-              <td id="bonus_score">Bonus - 50</td>
-              <td id="parir_of_one_score">1'pair - 12</td>
-              <td id="parir_of_two_score">2'pair - 22</td>
-              <td id="three_alike_score">3'alike - 18</td>
-              <td id="fours_alike_score">4'alike - 24</td>
-              <td id="small_straight_score">small straight - 15</td>
-              <td id="large_straight_score">Large straight - 20</td>
-              <td id="house_score">House - 28</td>
-              <td id="chance_score">Chance - 30</td>
-              <td id="yahtzee_score">Yahtzee - 50</td>
-              <td id="sum_total">SUM</td>
-            </tr>
-          </tbody>
+          <tbody id="points_table_body"></tbody>
         </table>
+
+        <section id="dice_roll_section">
+          <article id="dice_1">Dice One</article>
+          <article id="dice_2">Dice Two</article>
+          <article id="dice_3">Dice Three</article>
+          <article id="dice_4">Dice Four</article>
+          <article id="dice_5">Dice Five</article>
+          <button id="roll_dice_btn">Roll</button>
+        </section>
       </section>
 
       <section id="score_board">Game over</section>

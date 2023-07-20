@@ -4,6 +4,13 @@ window.addEventListener("load", start);
 
 let playerList = [];
 let playerScores = [];
+const dices = ["dice_1", "dice_2", "dice_3", "dice_4", "dice_5"];
+
+// let dice_0 = true;
+// let dice_1 = true;
+// let dice_2 = true;
+// let dice_3 = true;
+// let dice_4 = true;
 
 function start() {
   console.log("start");
@@ -127,15 +134,92 @@ function closeRemovePlayerDialog() {
 
 function startNewGame() {
   closeStartGameDialog();
-  palyerScores = createPlayersPointObjects();
+  createPlayersPointObjects();
+  diceRoll();
 }
 
 function createPlayersPointObjects() {
-  // for (const palyer of playerList) {
-  // }
+  for (const player of playerList) {
+    const playerObject = {
+      playerName: player,
+      ones: "",
+      twos: "",
+      threes: "",
+      fours: "",
+      fives: "",
+      sixes: "",
+      sum: "",
+      onePair: "",
+      twoPair: "",
+      threeAlike: "",
+      fourAlike: "",
+      smallStraight: "",
+      largeStraight: "",
+      house: "",
+      chance: "",
+      yahtzee: "",
+      total: "",
+    };
+    playerScores.push(playerObject);
+  }
+  createNewYhatzeeTable();
 }
 
-function createNewYhatzeeTable() {}
+function createNewYhatzeeTable() {
+  for (const player of playerScores) {
+    const playerPointsHTML =
+      /*HTML*/
+      `
+  <td>${player.playerName}</td>
+  <td>${player.ones}</td>
+  <td>${player.twos}</td>
+  <td>${player.threes}</td>
+  <td>${player.fours}</td>
+  <td>${player.fives}</td>
+  <td>${player.sixes}</td>
+  <td>${player.sum}</td>
+  <td>${player.onePair}</td>
+  <td>${player.twoPair}</td>
+  <td>${player.threeAlike}</td>
+  <td>${player.fourAlike}</td>
+  <td>${player.smallStraight}</td>
+  <td>${player.largeStraight}</td>
+  <td>${player.house}</td>
+  <td>${player.chance}</td>
+  <td>${player.yahtzee}</td>
+  <td>${player.total}</td>
+  `;
+    document
+      .querySelector("#points_table_body")
+      .insertAdjacentHTML("beforeend", playerPointsHTML);
+  }
+}
+
+function diceRoll() {
+  // clearAllDice();
+  for (let i = 0; i < dices.length; i++) {
+    const diceRoll = diceCalculator();
+    console.log(diceRoll);
+
+    document
+      .querySelector(`#dice_${[i + 1]}`)
+      .insertAdjacentHTML("beforeend", diceRoll);
+  }
+}
+
+function diceCalculator() {
+  const number = Math.ceil(Math.random() * 6);
+  return number;
+}
+
+// function clearAllDice() {
+//   for (const i of dices) {
+//     const clear = " ";
+//     document
+//       .querySelector(`#dice_${[i + 1]}`)
+//       .insertAdjacentHTML("beforeend", clear);
+//   }
+// }
 
 // 5 terninger - re'roll...
 //How many players
