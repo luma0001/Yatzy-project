@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Let's play Yatzee</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h2>Let's play Yahtzee</h2>
+    </header>
+    <main>
+      <section id="set_up">
+        Set up game
+        <div id="player_list_overview">Player List</div>
+        <form id="new_player_form">
+          <lable for="player_name">Player:</lable>
+          <input type="text" name="player" id="player_name" />
+          <button id="add_player_btn">Add Player</button>
+        </form>
+
+        <button>Start Game</button>
+
+        <dialog id="start_game_dialog">
+          <div id="game_player_list">People involved</div>
+          <button>Start</button>
+          <button>No</button>
+        </dialog>
+        <dialog id="remove_player_dialog">
+          <div id="player_to_be_removed">Remove this player</div>
+          <button>Remove</button>
+          <button>No</button>
+        </dialog>
+      </section>
+      <section id="live_game">
+        The game
+
+        <table>
+          <thead>
+            <tr>
+              <th>Ledger</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="player_name">Maximum Points</td>
+              <td id="ones_score">1's - 5</td>
+              <td id="twos_score">2's - 10</td>
+              <td id="threes_score">3's - 15</td>
+              <td id="fours_score">4's - 20</td>
+              <td id="fives_score">5's - 25</td>
+              <td id="sixes_score">6's - 30</td>
+              <td id="sum_one">SUM</td>
+              <td id="bonus_score">Bonus - 50</td>
+              <td id="parir_of_one_score">1'pair - 12</td>
+              <td id="parir_of_two_score">2'pair - 22</td>
+              <td id="three_alike_score">3'alike - 18</td>
+              <td id="fours_alike_score">4'alike - 24</td>
+              <td id="small_straight_score">small straight - 15</td>
+              <td id="large_straight_score">Large straight - 20</td>
+              <td id="house_score">House - 28</td>
+              <td id="chance_score">Chance - 30</td>
+              <td id="yahtzee_score">Yahtzee - 50</td>
+              <td id="sum_total">SUM</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="score_board">Game over</section>
+    </main>
+    <footer>Here's a footer</footer>
+
+    <script src="main.js" type="module"></script>
+  </body>
+</html>
