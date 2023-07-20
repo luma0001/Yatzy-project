@@ -20,17 +20,22 @@
           <button id="add_player_btn">Add Player</button>
         </form>
 
-        <button>Start Game</button>
+        <button id="start_game_btn">Start Game</button>
 
+        //Confirm new game
         <dialog id="start_game_dialog">
-          <div id="game_player_list">People involved</div>
-          <button>Start</button>
-          <button>No</button>
+          <ol id="game_player_list">
+            People involved
+          </ol>
+          <button id="accept_start_game_btn">Start</button>
+          <button id="close_start_game_dialog_btn">No</button>
         </dialog>
+
+        //Confirm remove player
         <dialog id="remove_player_dialog">
-          <div id="player_to_be_removed">Remove this player</div>
-          <button>Remove</button>
-          <button>No</button>
+          <p id="player_to_be_removed">Remove this player</p>
+          <button id="remove_player_from_playerlist_btn">Remove</button>
+          <button id="close_remove_player_dialog_btn">No</button>
         </dialog>
       </section>
       <section id="live_game">
