@@ -17,3 +17,7 @@ body {
 #player_turn_tracker :first-child {
   color: greenyellow;
 }
+
+.active_dice {
+  color: green;
+}

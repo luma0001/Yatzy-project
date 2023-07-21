@@ -7,11 +7,11 @@ let playerScores = [];
 // const dices = ["dice_1", "dice_2", "dice_3", "dice_4", "dice_5"];
 
 const dices = [
-  { title: "dice01", active: true, value: "?" },
-  { title: "dice02", active: true, value: "?" },
-  { title: "dice03", active: true, value: "?" },
-  { title: "dice04", active: true, value: "?" },
-  { title: "dice05", active: true, value: "?" },
+  { title: "dice_1", active: true, value: "?" },
+  { title: "dice_2", active: true, value: "?" },
+  { title: "dice_3", active: true, value: "?" },
+  { title: "dice_4", active: true, value: "?" },
+  { title: "dice_5", active: true, value: "?" },
 ];
 
 let firstRoll = true;
@@ -310,10 +310,12 @@ function displayDiceValues() {
 }
 
 function changeDiceActivity(dice) {
-  if(dice.active === true){
-    dice.active = false
+  if (dice.active === true) {
+    dice.active = false;
+    document.querySelector(`#${dice.title}`).classList.remove("active_dice");
   } else {
-  dice.active = true;  
+    dice.active = true;
+    document.querySelector(`#${dice.title}`).classList.add("active_dice");
   }
   console.log(dice);
 }
