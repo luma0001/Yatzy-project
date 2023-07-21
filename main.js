@@ -7,12 +7,15 @@ let playerScores = [];
 // const dices = ["dice_1", "dice_2", "dice_3", "dice_4", "dice_5"];
 
 const dices = [
-  { title: "dice01", active: true, value: 0 },
-  { title: "dice02", active: true, value: 0 },
-  { title: "dice03", active: true, value: 0 },
-  { title: "dice04", active: true, value: 0 },
-  { title: "dice05", active: false, value: 0 },
+  { title: "dice01", active: true, value: "?" },
+  { title: "dice02", active: true, value: "?" },
+  { title: "dice03", active: true, value: "?" },
+  { title: "dice04", active: true, value: "?" },
+  { title: "dice05", active: true, value: "?" },
 ];
+
+let firstRoll = true;
+let rolls = 3;
 
 function start() {
   console.log("start");
@@ -39,6 +42,8 @@ function activateClickEvents() {
   document
     .querySelector("#change_turn_btn")
     .addEventListener("click", changeTurnBtnClicked);
+
+  document.querySelector("#roll_dice_btn").addEventListener("click", diceRoll);
 }
 
 function addPlayerToGame(event) {
@@ -142,7 +147,7 @@ function startNewGame() {
   closeStartGameDialog();
   createPlayersPointObjects();
   updatePlayerTurnDisplay();
-  diceRoll();
+  // diceRoll();
   displayDiceValues();
 }
 
@@ -206,6 +211,7 @@ function createNewYhatzeeTable() {
 
 function changeTurnBtnClicked() {
   nextPlayersTurn();
+  resetDiceSet();
   setCurrentPlayer();
 }
 
@@ -226,7 +232,6 @@ function updatePlayerTurnDisplay() {
     const playerPositionHTML = `
     <div>${player}</div>
     `;
-
     document
       .querySelector("#player_turn_tracker")
       .insertAdjacentHTML("beforeend", playerPositionHTML);
@@ -245,30 +250,77 @@ function setCurrentPlayer() {
   console.log(activePlayer);
 }
 
-function displayDiceValues() {
-  document
-    .querySelectorAll("#dice_roll_section article:last-child .game_dice")
-    .addEventListener("click", diceSelected);
+function resetDiceSet() {
+  firstRoll = true;
+  rolls = 3;
+  for (const dice of dices) {
+    dice.active = true;
+    dice.value = "?";
+  }
+  displayDiceValues();
 }
+
+// function displayDiceValues() {
+//   document
+//     .querySelectorAll("#dice_roll_section article:last-child .game_dice")
+//     .addEventListener("click", diceSelected);
+// }
 
 function diceSelected(event) {
   console.log(event.target);
 }
 
 function diceRoll() {
-  // clearAllDice();
+  console.log("diceRoll");
+  decrementRolls();
+  if (rolls >= 0) {
+    firstRoll = false;
+    for (let i = 0; i < dices.length; i++) {
+      const dice = dices[i];
+      if (dice.active === true) {
+        dice.value = diceCalculator();
+        console.log(dice.value);
+      } else {
+        continue;
+      }
+    }
+  }
+  console.log("ROLLS:");
+  console.log(rolls);
+  displayDiceValues();
+}
+
+function decrementRolls() {
+  rolls--;
+}
+
+function displayDiceValues() {
+  clearDiceValuesDisplay();
   for (let i = 0; i < dices.length; i++) {
     const dice = dices[i];
-    if (dice.active === true) {
-      let game_dice = dice.value;
-      game_dice = diceCalculator();
+    const game_dice = dice.value;
+    document
+      .querySelector(`#dice_${[i + 1]}`)
+      .insertAdjacentHTML("beforeend", game_dice);
 
-      document
-        .querySelector(`#dice_${[i + 1]}`)
-        .insertAdjacentHTML("beforeend", game_dice);
-    } else {
-      continue;
-    }
+    document
+      .querySelector(`#dice_${[i + 1]}`)
+      .addEventListener("click", () => changeDiceActivity(dice));
+  }
+}
+
+function changeDiceActivity(dice) {
+  if(dice.active === true){
+    dice.active = false
+  } else {
+  dice.active = true;  
+  }
+  console.log(dice);
+}
+
+function clearDiceValuesDisplay() {
+  for (let i = 0; i < dices.length; i++) {
+    document.querySelector(`#dice_${[i + 1]}`).innerHTML = "";
   }
 }
 
