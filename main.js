@@ -147,8 +147,7 @@ function startNewGame() {
   closeStartGameDialog();
   createPlayersPointObjects();
   updatePlayerTurnDisplay();
-  // diceRoll();
-  displayDiceValues();
+  resetDiceSet();
 }
 
 function createPlayersPointObjects() {
@@ -256,8 +255,18 @@ function resetDiceSet() {
   for (const dice of dices) {
     dice.active = true;
     dice.value = "?";
+    document.querySelector(`#${dice.title}`).classList.remove("inactive_dice");
+    // document.querySelector(`#${dice.title}`).classList.remove("active_dice");
+    document.querySelector(`#${dice.title}`).classList.add("active_dice");
+    // cancelDiceClickEvent(dice);
   }
   displayDiceValues();
+}
+
+function cancelDiceClickEvent(dice) {
+  document
+    .querySelector(`#${dice.title}`)
+    .removeEventListener("click", changeDiceActivity);
 }
 
 // function displayDiceValues() {
@@ -303,19 +312,25 @@ function displayDiceValues() {
       .querySelector(`#dice_${[i + 1]}`)
       .insertAdjacentHTML("beforeend", game_dice);
 
-    document
-      .querySelector(`#dice_${[i + 1]}`)
-      .addEventListener("click", () => changeDiceActivity(dice));
+    if (dice.value != "?")
+      document
+        .querySelector(`#dice_${[i + 1]}`)
+        .addEventListener("click", () => changeDiceActivity(dice));
   }
 }
 
 function changeDiceActivity(dice) {
+  // document
+  //   .querySelector(`#${dice.title}}`)
+  //   .removeEventListener("click", () => changeDiceActivity(dice));
   if (dice.active === true) {
     dice.active = false;
+    document.querySelector(`#${dice.title}`).classList.add("inactive_dice");
     document.querySelector(`#${dice.title}`).classList.remove("active_dice");
   } else {
     dice.active = true;
     document.querySelector(`#${dice.title}`).classList.add("active_dice");
+    document.querySelector(`#${dice.title}`).classList.remove("inactive_dice");
   }
   console.log(dice);
 }
@@ -329,6 +344,11 @@ function clearDiceValuesDisplay() {
 function diceCalculator() {
   const number = Math.ceil(Math.random() * 6);
   return number;
+}
+
+function choosePoints() {
+  if (rolls < 3) {
+  }
 }
 
 // function clearAllDice() {

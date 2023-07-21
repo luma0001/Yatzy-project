@@ -21,3 +21,6 @@ body {
 .active_dice {
   color: green;
 }
+.inactive_dice {
+  color: red;
+}

@@ -85,6 +85,31 @@
         <button id="roll_dice_btn">Roll</button>
       </section>
 
+      <article id="points">
+        <form>
+          <lable for="point_selector">Vælg...</lable>
+          <select id="point_selector" name="point_selector">
+            <option value="ones_score">1's</option>
+            <option value="twos_score">2's</option>
+            <option value="threes_score">3's</option>
+            <option value="fours_score">4's</option>
+            <option value="fives_score">5's</option>
+            <option value="sixes_score">6's</option>
+            <option value="bonus_score">Bonus</option>
+            <option value="parir_of_one_score">1'pair</option>
+            <option value="parir_of_two_score">2'pair</option>
+            <option value="three_alike_score">3'alike></option>
+            <option value="fours_alike_score">4'alike</option>
+            <option value="small_straight_score">small straight</option>
+            <option value="large_straight_score">Large straight</option>
+            <option value="house_score">House</option>
+            <option value="chance_score">Chance</option>
+            <option value="yahtzee_score">Yahtzee</option>
+          </select>
+          <button id="point_switch">add points</button>
+        </form>
+      </article>
+
       <section id="score_board">Game over</section>
     </main>
     <footer>Here's a footer</footer>
