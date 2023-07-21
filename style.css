@@ -13,3 +13,7 @@ body {
 #score_board {
   background-color: palevioletred;
 }
+
+#player_turn_tracker :first-child {
+  color: greenyellow;
+}

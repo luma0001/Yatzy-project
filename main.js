@@ -2,15 +2,17 @@
 
 window.addEventListener("load", start);
 
-let playerList = [];
+let playerList = ["Mikkel", "Line", "Peter", "Kasper"];
 let playerScores = [];
-const dices = ["dice_1", "dice_2", "dice_3", "dice_4", "dice_5"];
+// const dices = ["dice_1", "dice_2", "dice_3", "dice_4", "dice_5"];
 
-// let dice_0 = true;
-// let dice_1 = true;
-// let dice_2 = true;
-// let dice_3 = true;
-// let dice_4 = true;
+const dices = [
+  { title: "dice01", active: true, value: 0 },
+  { title: "dice02", active: true, value: 0 },
+  { title: "dice03", active: true, value: 0 },
+  { title: "dice04", active: true, value: 0 },
+  { title: "dice05", active: false, value: 0 },
+];
 
 function start() {
   console.log("start");
@@ -33,6 +35,10 @@ function activateClickEvents() {
   document
     .querySelector("#close_start_game_dialog_btn")
     .addEventListener("click", closeStartGameDialog);
+
+  document
+    .querySelector("#change_turn_btn")
+    .addEventListener("click", changeTurnBtnClicked);
 }
 
 function addPlayerToGame(event) {
@@ -135,7 +141,9 @@ function closeRemovePlayerDialog() {
 function startNewGame() {
   closeStartGameDialog();
   createPlayersPointObjects();
+  updatePlayerTurnDisplay();
   diceRoll();
+  displayDiceValues();
 }
 
 function createPlayersPointObjects() {
@@ -162,6 +170,7 @@ function createPlayersPointObjects() {
     };
     playerScores.push(playerObject);
   }
+
   createNewYhatzeeTable();
 }
 
@@ -195,15 +204,71 @@ function createNewYhatzeeTable() {
   }
 }
 
+function changeTurnBtnClicked() {
+  nextPlayersTurn();
+  setCurrentPlayer();
+}
+
+function nextPlayersTurn() {
+  console.log("nextPlayersTurn");
+  const firstPlayer = playerList[0];
+  console.log(firstPlayer);
+  playerList.push(firstPlayer);
+  playerList.shift();
+  updatePlayerTurnDisplay();
+}
+
+function updatePlayerTurnDisplay() {
+  document.querySelector("#player_turn_tracker").innerHTML = "";
+  console.log("updatePlayerTurnDisplay");
+
+  for (const player of playerList) {
+    const playerPositionHTML = `
+    <div>${player}</div>
+    `;
+
+    document
+      .querySelector("#player_turn_tracker")
+      .insertAdjacentHTML("beforeend", playerPositionHTML);
+  }
+}
+
+function setCurrentPlayer() {
+  console.log("setCurrentPlayer");
+  let activePlayer;
+  const currentPlayerName = playerList[0];
+  for (const player of playerScores) {
+    if (currentPlayerName === player.playerName) {
+      activePlayer = player;
+    }
+  }
+  console.log(activePlayer);
+}
+
+function displayDiceValues() {
+  document
+    .querySelectorAll("#dice_roll_section article:last-child .game_dice")
+    .addEventListener("click", diceSelected);
+}
+
+function diceSelected(event) {
+  console.log(event.target);
+}
+
 function diceRoll() {
   // clearAllDice();
   for (let i = 0; i < dices.length; i++) {
-    const diceRoll = diceCalculator();
-    console.log(diceRoll);
+    const dice = dices[i];
+    if (dice.active === true) {
+      let game_dice = dice.value;
+      game_dice = diceCalculator();
 
-    document
-      .querySelector(`#dice_${[i + 1]}`)
-      .insertAdjacentHTML("beforeend", diceRoll);
+      document
+        .querySelector(`#dice_${[i + 1]}`)
+        .insertAdjacentHTML("beforeend", game_dice);
+    } else {
+      continue;
+    }
   }
 }
 
@@ -224,4 +289,3 @@ function diceCalculator() {
 // 5 terninger - re'roll...
 //How many players
 // How to change turn...
-//
